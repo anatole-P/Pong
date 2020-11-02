@@ -1,0 +1,26 @@
+body{
+    text-align: center;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    font-family: 'Courier New', Courier, monospace;
+}
+#terrain{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    width: 800px;
+    height: 400px;
+    background-color: #ddaabb;
+}
+#balle{
+    position: absolute;
+    margin-left: center;
+    margin-right: center;
+    margin-top: 50%;
+    margin-bottom: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(0, 17, 255);
+    border-radius: 400px;
+}
