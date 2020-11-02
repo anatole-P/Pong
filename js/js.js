@@ -7,7 +7,7 @@ let haut=parseInt(#balle).css("top");
 alert(largeur)
 
 setInterval(function() => {
-    gauche=gauche+1;
+    gauche=gauche+1; b
     haut=haut+0.5;
     $:("#balle").css("left",gauche)
     $:("#balle").css("top",haut)
