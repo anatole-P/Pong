@@ -1,10 +1,6 @@
-alert("Cc la tcheam");
-
-
-
-let largeur=$("#ball").width();
-let gauche=parseInt(($("#ball").css("left")));
-let haut=parseInt(($("#ball").css("top")));
+let largeur =$("#ball").width();
+let gauche = parseInt(($("#ball").css("left")));
+let haut= parseInt(($("#ball").css("top")));
 alert(gauche);
 
 let i=0;
