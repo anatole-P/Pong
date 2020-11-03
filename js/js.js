@@ -1,14 +1,23 @@
 alert("Cc la tcheam");
 
 
-let largeur=$("#balle").width();
-let gauche=parseInt($("#balle").css("left"));
-let haut=parseInt($("#balle").css("top"));
-alert(largeur);
 
+let largeur=$("#ball").width();
+let gauche=parseInt(($("#ball").css("left")));
+let haut=parseInt(($("#ball").css("top")));
+alert(gauche);
+
+let i=0;
 setInterval(function(){
-    gauche=gauche+1;
-    haut=haut+0.5;
-    $("#balle").css("left",gauche);
-    $("#balle").css("top",haut);
+    gauche = gauche + 1;
+    haut = haut + 1;
+    $("#ball").css("left",gauche);
+    $("#ball").css("top",haut)
+    if(gauche >= 800){
+        alert("elle est dehors")
+    }
+    if (haut >= 400){
+        alert("elle est dehors")
+    }
 }, 10);
+
