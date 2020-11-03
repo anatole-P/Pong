@@ -1,1 +1,1 @@
-# P1NG
+# P1NG : https://anatole-p.github.io/Pong/index.html
