@@ -15,7 +15,7 @@ body{
 }
 #balle{
     position: absolute;
-    left: center;
+    left: 50%;
     top: 50%;
     margin-bottom: 50%;
     width: 20px;
