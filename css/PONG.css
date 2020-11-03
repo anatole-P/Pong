@@ -15,9 +15,8 @@ body{
 }
 #balle{
     position: absolute;
-    margin-left: center;
-    margin-right: center;
-    margin-top: 50%;
+    left: center;
+    top: 50%;
     margin-bottom: 50%;
     width: 20px;
     height: 20px;
