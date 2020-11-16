@@ -12,7 +12,7 @@ raquetteDroite.changeDirection();
 setInterval(function(){
 
 //On créé une boucle pour utiliser les fonction précédentes
-    balle.majHTML();
+//    balle.majHTML();
 
     balle.bouger();
     
@@ -21,3 +21,15 @@ setInterval(function(){
     raquetteDroite.bouger();
 
 }, 10);
+
+
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) { return}
+    console.log("La touche '"+event.key+ "' a été enfoncée")
+    event.preventDefault();
+}, true);
+window.addEventListener("keyup", function (event) {
+    if (event.defaultPrevented) { return}
+    console.log("La touche '"+event.key+ "' a été relachée")
+    event.preventDefault();
+}, true);

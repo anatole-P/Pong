@@ -3,16 +3,19 @@ class Raquette{
     constructor($element){
         this.$element = $element;
 
-        this.largeur = $element.width();
+//        this.largeur = $element.width();
         this.hauteur = $element.height();
 
-        this.positionX = parseInt($element.css("left"));
+//        this.positionX = parseInt($element.css("left"));
         this.positionY = parseInt($element.css("top"));
 
         this.direction = 1;
         this.vitesse = 3;
-    }
 
+    }
+    get bas(){
+        return this.positionY+this.hauteur;
+    }
     bouger(){
         this.positionY += this.vitesse*this.direction;
         this.limite();

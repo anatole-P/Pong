@@ -4,7 +4,7 @@ class Balle{
 
         this.hauteur = $element.height();
         this.largeur = $element.width();
-        
+
         this.positionX = parseInt($element.css("left"));
         this.positionY = parseInt($element.css("top"));
         
@@ -12,6 +12,7 @@ class Balle{
         this.vitesseY = 0.5;
         this.angle = Math.random()*2*Math.PI;
     }
+
 
     bouger(){
         this.positionX += Math.cos(this.angle) * this.vitesseX;
