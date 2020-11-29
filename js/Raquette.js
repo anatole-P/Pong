@@ -1,43 +1,84 @@
-/* On créé une classe pour définir les paramètres des raquettes */
 class Raquette{
     constructor($element){
-        this.$element = $element;
+        this.$element=$element
+        //let $raquette = $(".raquette","gauche");
+        //Rappelle des infos graphiques du CSS pour correspondre colision, mouvement et visuel
+        this.haut=parseInt($element.css("top"));
+        this.gauche=parseInt($element.css("left"));
+        this.largeur=parseInt($element.css("width"));
+        this.hauteur=parseInt($element.css("height"));
+        
+        
 
-//        this.largeur = $element.width();
-        this.hauteur = $element.height();
-
-//        this.positionX = parseInt($element.css("left"));
-        this.positionY = parseInt($element.css("top"));
-
-        this.direction = 1;
-        this.vitesse = 3;
-
+        this.vitesse=10; //Vitesse de déplacement automatique de la raquette
+        this.direction=0; //+1 fait descendre, -1 fait monter
     }
-    get bas(){
-        return this.positionY+this.hauteur;
-    }
-    bouger(){
-        this.positionY += this.vitesse*this.direction;
-        this.limite();
+    get droite(){ return this.gauche+this.largeur; }
+
+    set droite(value){ this.gauche = value - this.largeur; }
+
+    get bas(){ return this.haut+this.hauteur; }
+
+    set bas(value){ this.haut = value - this.hauteur; }
+
+    deplacement()
+    {
+        this.haut = this.haut + this.vitesse*this.direction; //vitesse comprenant la direction 
+        this.LimiteRaquette();
         this.majHTML();
     }
 
-    changeDirection(){
-        this.direction *= -1;
+    monter()
+    {
+        this.direction=-1;
     }
+    descendre()
+    {
+        this.direction=1;
+    }
+    arret()
+    {
+        this.direction=0;
+    }
+    ajoutScore(){
+        this.score += 1;
+        this.$element.text(this.score);
+    }
+    LimiteRaquette(){
+        if(this.bas>terrain.hauteur){ //permet à la raquette de remonter quand elle touche le bas du terrain
+            this.bas=terrain.hauteur
+            this.direction=0;}
+        if(this.haut<0){//permet à la raquette de redescendre quand elle touche le haut du terrain
+            this.haut=0
+            this.direction=0;
+        }
+    }
+    bordRaquetteDroite() {
+        //ajout d'une classe css
+        this.$element.addClass("bordRaquetteDroite");
+        let buffer = this;
 
+        setTimeout(
+            function () {
+                //retirer une classe au bout de 200 ms
+                buffer.$element.removeClass("bordRaquetteDroite");
+            }, 200
+        );
+    }
+    bordRaquetteGauche() {
+        //ajout d'une classe css
+        this.$element.addClass("bordRaquetteGauche");
+        let buffer = this;
+
+        setTimeout(
+            function () {
+                //retirer une classe au bout de 200 ms
+                buffer.$element.removeClass("bordRaquetteGauche");
+            }, 200
+        );
+    }
     majHTML(){
-        this.$element.css("top",this.positionY);
-    }
+        this.$element.css("top", this.haut); //actualisation du CSS
+}
 
-    limite(){
-        if(this.positionY + this.hauteur > terrain.hauteur){
-            this.positionY = terrain.hauteur - this.hauteur;
-            this.changeDirection();
-        }
-        if(this.positionY < 0){
-            this.positionY = 0;
-            this.changeDirection();
-        }
-    }
 }

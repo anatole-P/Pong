@@ -1,58 +1,126 @@
 class Balle{
     constructor($element){
-        this.$element = $element;
-
-        this.hauteur = $element.height();
-        this.largeur = $element.width();
-
-        this.positionX = parseInt($element.css("left"));
-        this.positionY = parseInt($element.css("top"));
+        /*Permet d'appeler les informations saisies dans le code CSS pour faire correspondre
+        les données de colisions et avec les données graphiques*/
+        this.$element=$element;
+        //coordonnées de la balles
         
-        this.vitesseX = 2;
-        this.vitesseY = 0.5;
-        this.angle = Math.random()*2*Math.PI;
+        this.haut=parseInt($element.css("top"));
+        this.gauche=parseInt($element.css("left"));
+        
+        //taille de la balle
+        this.largeur=parseInt(($element).css("width"));
+        this.hauteur=parseInt(($element).css("height"));
+        
+        //Configure la vitesse de la balle
+        this.vitesseX= 2.5;  //selon la largeur IL FAUT ÉQUILIBRER LA VITESSE
+        this.vitesseY= 2-Math.random()*4;  //selon la hauteur
+        this.vitesseXmax= 8; //Cap de la vitesse Mac
+        this.directionX= 1;
+        this.directionY= 1;
     }
-
-
-    bouger(){
-        this.positionX += Math.cos(this.angle) * this.vitesseX;
-        this.positionY += Math.sin(this.angle) * this.vitesseY;
-
-        this.limite();
-        this.majHTML();
-    }
-
-    limite(){
-        //haut
-        if(this.positionY < 0){
-            terrain.dab();
-            this.positionY = 0;
-            this.vitesseY *= -1;
-        }
-
-        //bas
-        if( (this.positionY + this.hauteur) > terrain.hauteur){
-            terrain.dab();
-            this.positionY = terrain.hauteur - this.hauteur;
-            this.vitesseY *= -1;
-        }
-    
-        //droite
-        if( (this.positionX + this.largeur) > terrain.largeur){
-            this.positionX = terrain.largeur - this.largeur;
-            this.vitesseX *= -1;
-        }
-
-        //gauche
-        if(this.positionX < 0){
-            this.positionX = 0;
-            this.vitesseX *= -1;
-        }
-
-    }
-
+    //Permet d'actualiser ces termes dans le CSS
     majHTML(){
-        this.$element.css("left",balle.positionX);
-        this.$element.css("top",balle.positionY);
+        this.$element.css("left",this.gauche);
+        this.$element.css("top",this.haut);
+        this.$element.css("width",this.largeur);
+        this.$element.css("height",this.hauteur);
+    }
+
+    get droite(){ //créé la coordonnée droite
+        return this.largeur+this.gauche;
+    }
+    set droite(value){ //récupère la coordonnée droite
+        this.gauche = value - this.largeur;
+    }
+    get bas(){ //créé la coordonnée bas
+        return this.hauteur+this.haut;
+    }
+    set bas(value){ //récupère la coordonnée bas
+        this.haut = value - this.hauteur;
+    }
+
+    mouvementetrebond() {
+        this.gauche = this.gauche + this.vitesseX*this.directionX; //Donne un mouvement à la balle vers la droite
+        this.haut = this.haut + this.vitesseY*this.directionY; //Donne un mouvement à la balle vers le bas
+
+        //Collisions avec le terrain
+
+       
+        //bord bas
+        if (this.bas > terrain.hauteur) {
+            this.bas = terrain.hauteur;
+            this.directionY = this.directionY* -1;
+            terrain.bordBas();
+        }
+        //bord haut
+        if (this.haut < 0) {
+            this.haut = 0;
+            this.directionY = this.directionY * -1;
+            terrain.bordHaut();
+        }
+
+        //Collisions avec les raquettes
+        //raquette droite
+        if (this.droite >= raquetteDroite.gauche) { //conditions de rebond
+            if (this.haut < raquetteDroite.bas) {
+                if (this.bas > raquetteDroite.haut) {
+                    this.droite = raquetteDroite.gauche;
+                    this.directionX *= -1;
+                    raquetteDroite.bordRaquetteDroite();
+                    if (this.vitesseX < this.vitesseXmax) { //accélération
+                        this.vitesseX += 0.5;
+                        console.log(this.vitesseX, "a");
+                    } else {
+                        this.vitesseX= this.vitesseXmax; //cap de la vitessemax
+                        
+                    }
+                        
+                    
+                }
+            }
+        }
+
+        //raquette gauche
+        if (this.gauche <= raquetteGauche.droite) { //conditions de rebond
+            if (this.bas > raquetteGauche.haut) {
+                if (this.haut < raquetteGauche.bas) {
+                    this.gauche = raquetteGauche.droite;
+                    raquetteGauche.bordRaquetteGauche();
+                    if (this.vitesseX < this.vitesseXmax) { //accélération
+                        this.vitesseX += 0.5;
+                        this.directionX *= -1;
+                        console.log(this.vitesseX, "b");
+                    } else {
+                        this.vitesseX= this.vitesseXmax; //cap de la vitessemax
+                        this.directionX *= -1;
+                    }
+                }
+            }
+        }
+        
+        //bord droit
+        if (this.droite > terrain.largeur) {
+            this.retouraucentre(); //expliqué en bas de code
+            this.vitesseX = 2.5;
+            this.directionX *= -1;
+            terrain.bordDroite();
+            raquette.ajoutScore();
+        }
+        //bord gauche
+        if (this.gauche < 0) {
+            this.retouraucentre(); //expliqué en bas de code
+            this.vitesseX = 2.5;
+            this.directionX *= -1;
+            terrain.bordGauche();
+        }
+        
+    this.majHTML(); //Actualiser le CSS
+
+}
+    retouraucentre() //focntion renvoyant la balle au milieu
+    {
+        this.gauche = terrain.largeur / 2 - this.largeur/2;
+        this.haut = terrain.hauteur / 2 - this.hauteur/2;
     }
 }

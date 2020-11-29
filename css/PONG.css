@@ -30,7 +30,42 @@ body{
 .dab{
     border-color: rgb(0, 250, 0) !important;
 }
+.bordHaut {
+    border-top-color: rgb(0, 250, 0) !important;
+}
 
+.bordBas {
+    border-bottom-color: rgb(0, 250, 0) !important;
+}
+.bordGauche {
+    border-left-color: rgb(250, 0, 0) !important;
+}
+
+.bordDroite {
+    border-right-color: rgb(250, 0, 0) !important;
+}
+.score {
+    display: flex;
+}
+
+.scoreG{
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    color: rgb(0, 102, 255);
+    opacity: 0.6;
+}
+.scoreD{
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    color: rgb(255, 123, 0);
+    opacity: 0.6;
+}
 .raquette{
     
     position: absolute;
@@ -42,6 +77,12 @@ body{
     width: 10px;
     height: var(--hauteur);
     background-color: #fff;
+}
+.bordRaquetteGauche{
+    background-color:rgb(60, 218, 60)!important;
+}
+.bordRaquetteDroite{
+    background-color:rgb(60, 218, 60) !important;
 }
 #droite
 {
