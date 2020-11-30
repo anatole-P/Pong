@@ -38,7 +38,8 @@ bordDroite() {
     //ajouter une classe du css 
     this.$element.addClass("bordDroite");
     let buffer = this;
-
+    this.score += 1;
+    this.$element.text(this.score);
     setTimeout(
         function () {
             //retirer une classe au bout de 200 millisecondes
@@ -47,14 +48,14 @@ bordDroite() {
     );
 }
 ajoutScore(){
-    this.score += 1;
-    this.$element.text(this.score);
+
 }
 bordGauche() {
     //ajouter une classe du css
     this.$element.addClass("bordGauche");
     let buffer = this;
-
+        this.score += 1;
+    this.$element.text(this.score);
     setTimeout(
         function () {
             //retirer une classe au bout de 200 millisecondes
