@@ -105,7 +105,7 @@ class Balle{
             this.vitesseX = 2.5;
             this.directionX *= -1;
             terrain.bordDroite();
-            raquette.ajoutScore();
+            //raquette.ajoutScore();
         }
         //bord gauche
         if (this.gauche < 0) {
