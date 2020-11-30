@@ -49,7 +49,7 @@ body{
 }
 
 .scoreG{
-    padding: 25% 10% 25%;
+    padding: 20% 10%;
     width: 50%;
     height: 50%;
     justify-content: center;
@@ -59,7 +59,7 @@ body{
     opacity: 0.6;
 }
 .scoreD{
-    padding: 25% 10% 25%;
+    padding: 25% 10%;
     width: 50%;
     height: 50%;
     justify-content: center;
