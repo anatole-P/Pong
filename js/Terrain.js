@@ -38,7 +38,7 @@ bordDroite() {
     //ajouter une classe du css 
     this.$element.addClass("bordDroite");
     let buffer = this;
-    this.score += 1;
+    //this.score += 1;
     this.$element.text(this.score);
     setTimeout(
         function () {
@@ -54,7 +54,7 @@ bordGauche() {
     //ajouter une classe du css
     this.$element.addClass("bordGauche");
     let buffer = this;
-        this.score += 1;
+  //this.score += 1;
     this.$element.text(this.score);
     setTimeout(
         function () {
