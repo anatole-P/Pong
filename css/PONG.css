@@ -49,6 +49,7 @@ body{
 }
 
 .scoreG{
+    left : 25%;
     width: 50%;
     height: 50%;
     justify-content: center;
@@ -58,6 +59,7 @@ body{
     opacity: 0.6;
 }
 .scoreD{
+    right:25%;
     width: 50%;
     height: 50%;
     justify-content: center;
